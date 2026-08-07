@@ -33,6 +33,38 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# secrets and credentials
+.npmrc
+.netrc
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+kubeconfig*
+talosconfig*
+.aws/
+.azure/
+.config/gcloud/
+credentials*.json
+service-account*.json
+*-service-account.json
+application_default_credentials.json
+
+# terraform
+.terraform/
+.terraformrc
+terraform.rc
+*.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
 # vercel
 .vercel
 
