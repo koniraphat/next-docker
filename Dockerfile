@@ -18,14 +18,15 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-COPY --from=builder --chown=node:node /app/public ./public
+# Copy assets and standalone server
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
-RUN mkdir .next && chown node:node .next
+# Ensure permissions work seamlessly on standard Docker, Kubernetes, and OpenShift (Random UID with GID 0)
+RUN chgrp -R 0 /app && chmod -R g=u /app
 
-COPY --from=builder --chown=node:node /app/.next/standalone ./
-COPY --from=builder --chown=node:node /app/.next/static ./.next/static
-
-USER node
+USER 1001
 
 EXPOSE 3000
 
